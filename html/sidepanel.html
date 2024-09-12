@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Sidepanel</title>
+    <title>TDXReporter</title>
+    <link rel="stylesheet" href="../css/side-panel.css">
   </head>
   <body>
-    <h1>All sites sidepanel extension</h1>
-    <p>This side panel is enabled only on TDX Reporting sites</p>
+    <main>
+      <h1 class="heading">TDXReporter</h1>
+      <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the report for the specified user.</p>
+    </main>
+    <section>
+      <h1 class="heading">Report Runner</h1>
+      <textarea id="uuid-input" class="text-input"></textarea>
+      <button id="uuid-button" class="button">Run Report</button>
+
+      <script src="../js/side-panel.js"></script>
+
+    </section>
+    <section>
+      <h1 class="heading">Report Info</h1>
+    </section>
   </body>
 </html>

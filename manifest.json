@@ -15,7 +15,22 @@
       "default_title": "Click to open panel"
     },
     "background": {
-      "service_worker": "service-worker.js"
+      "service_worker": "js/service-worker.js"
     },
-    "permissions": ["sidePanel", "tabs"]
+    "content_scripts": [
+      { 
+        "matches": ["https://tdx.umn.edu/TDNext/Apps/29/Reporting/*"],
+        "js": ["js/tdx-content.js"]
+      }
+    ],
+    "host_permissions": [
+      "https://tdx.umn.edu/*"
+    ],
+    "web_accessible_resources": [
+    {
+      "resources": ["js/inject.js"],
+      "matches": ["<all_urls>"]
+    }
+    ],
+    "permissions": ["sidePanel", "activeTab", "tabs", "scripting"]
 }
