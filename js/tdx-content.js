@@ -34,7 +34,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
       });
 
-      // chrome.runtime.sendMessage({ action: "execute_postback" });
       runReport()
   }
+});
+
+// Listen for messages from the injected script
+window.addEventListener("message", (event) => {
+    // Only accept messages from the same origin
+    if (event.source !== window) return;
+
+    if (event.data.action === "report_recieved") {
+        console.log("Received Injected Data:", event.data.data);
+
+        // Optionally, forward the data to the background script
+        chrome.runtime.sendMessage({
+            action: "sidepanel_send",
+            data: event.data.data
+        });
+    }
 });
