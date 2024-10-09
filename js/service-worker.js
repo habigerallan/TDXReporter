@@ -4,7 +4,7 @@ const updateSidePanelVisibility = async (tabId, url) => {
   if (url.startsWith(TDX_ORIGIN)) {
     await chrome.sidePanel.setOptions({
       tabId,
-      path: 'html/sidepanel.html',
+      path: 'html/side-panel.html',
       enabled: true,
     });
   } else {

@@ -9,7 +9,7 @@
       "128": "images/icon-128.png"
     },
     "side_panel": {
-      "default_path": "html/sidepanel.html"
+      "default_path": "html/side-panel.html"
     },
     "action": {
       "default_title": "Click to open panel"
@@ -32,5 +32,5 @@
       "matches": ["<all_urls>"]
     }
     ],
-    "permissions": ["sidePanel", "activeTab", "tabs", "scripting"]
+    "permissions": ["sidePanel", "activeTab", "tabs", "scripting", "clipboardRead", "clipboardWrite"]
 }

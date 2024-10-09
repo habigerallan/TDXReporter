@@ -12,7 +12,21 @@ document.getElementById('uuid-button').addEventListener('click', function() {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "sidepanel_send") {
         const tableData = request.data;
+        
+        let phonesTotal = 0;
+            let emailsAndSelfServiceTotal = 0;
+            let chatsTotal = 0;
+            let otherTotal = 0;
 
+            // Category mappings
+            const categoryMap = {
+                "Phone": "phonesTotal",
+                "Self-service": "emailsAndSelfServiceTotal",
+                "Email": "emailsAndSelfServiceTotal",
+                "Chat": "chatsTotal",
+                "Walk-in": "otherTotal",
+                "Auto-generated": "otherTotal"
+            };
 
         let existingTable = document.querySelector('table');
 
@@ -33,12 +47,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         const thLeft = document.createElement('th');
         thLeft.textContent = 'Type';
-        thLeft.style.border = '1px solid black';
-        thLeft.style.padding = '8px';
+
         const thRight = document.createElement('th');
         thRight.textContent = 'Amount';
-        thRight.style.border = '1px solid black';
-        thRight.style.padding = '8px';
 
         headerRow.appendChild(thLeft);
         headerRow.appendChild(thRight);
@@ -54,13 +65,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
             const tdLeft = document.createElement('td');
             tdLeft.textContent = rowData.left;
-            tdLeft.style.border = '1px solid black';
-            tdLeft.style.padding = '8px';
 
             const tdRight = document.createElement('td');
             tdRight.textContent = rowData.right;
-            tdRight.style.border = '1px solid black';
-            tdRight.style.padding = '8px';
+
+            const category = categoryMap[rowData.left];
+                if (category) {
+                    if (category === "phonesTotal") {
+                        phonesTotal += parseFloat(rowData.right);
+                    } else if (category === "emailsAndSelfServiceTotal") {
+                        emailsAndSelfServiceTotal += parseFloat(rowData.right);
+                    } else if (category === "chatsTotal") {
+                        chatsTotal += parseFloat(rowData.right);
+                    } else if (category === "otherTotal") {
+                        otherTotal += parseFloat(rowData.right);
+                    }
+                }
 
             row.appendChild(tdLeft);
             row.appendChild(tdRight);
@@ -68,6 +88,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
 
         table.appendChild(tbody);
-        document.getElementById("report_details").appendChild(table);
+        document.getElementById("report_details").prepend(table);
+
+        let existingButton = document.getElementById('copy');
+        let copyButton;
+        if (!existingButton) {
+            copyButton = document.createElement('button');
+            copyButton.id = "copy"
+            copyButton.class = "button"
+            copyButton.textContent = "Copy to clipboard";
+            document.getElementById("report_details").appendChild(copyButton);
+
+            copyButton.addEventListener('click', function() {
+                const totals = `${phonesTotal}\t${emailsAndSelfServiceTotal}\t${chatsTotal}\t${otherTotal}`;
+                navigator.clipboard.writeText(totals).then(function() {
+                    alert('Copied the totals');
+                }).catch(function(err) {
+                    console.error('Failed to copy totals: ', err);
+                });
+            });
+        } else {
+            copyButton = existingButton;
+        }
+
     }
 });
