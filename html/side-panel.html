@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TDXReporter</title>
-    <link rel="stylesheet" href="../css/side-panel.css">
-  </head>
-  <body>
-    <main>
-      <h1 class="heading">TDXReporter</h1>
-      <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the report for the specified user.</p>
-    </main>
-    <section>
-      <h1 class="heading">Report Runner</h1>
-      <textarea id="uuid-input" class="text-input"></textarea>
-      <button id="uuid-button" class="button">Run Report</button>
 
-      <script src="../js/side-panel.js"></script>
+<head>
+  <title>TDXReporter</title>
+  <link rel="stylesheet" href="../css/side-panel.css">
+  <script src="../js/side-panel.js"></script>
+</head>
 
-    </section>
-    <section>
-      <h1 class="heading">Report Info</h1>
-      <section id="report_details"></section>
-    </section>
-  </body>
+<body>
+  <main>
+    <h1 class="heading">TDXReporter</h1>
+    <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the
+      report for the specified user.</p>
+  </main>
+  <iframe id="report-page"
+    src="https://tdx.umn.edu/TDNext/Apps/29/Reporting/ReportViewer?ReportID=9sbgP2Ep9uY_"></iframe>
+  <section>
+    <h1 class="heading">Report Runner</h1>
+    <textarea id="uuid-input" class="text-input"></textarea>
+    <button id="uuid-button" class="button">Run Report</button>
+  </section>
+  <section>
+    <h1 class="heading">Report Info</h1>
+    <section id="report_details"></section>
+  </section>
+</body>
+
 </html>
