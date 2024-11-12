@@ -17,10 +17,10 @@
   "content_scripts": [
     {
       "matches": [
-        "https://tdx.umn.edu/TDNext/Apps/29/Reporting/*"
+        "<all_urls>"
       ],
       "js": [
-        "js/tdx-content.js"
+        "js/content_script.js"
       ],
       "all_frames": true
     }
@@ -31,8 +31,10 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "js/inject.js",
-        "js/tdx-content.js"
+        "js/run_report.js",
+        "js/check_url.js",
+        "js/check_loaded.js",
+        "js/content_script.js"
       ],
       "matches": [
         "<all_urls>"

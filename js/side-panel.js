@@ -1,112 +1,114 @@
-console.log("main started");
+function createTableFromData(tableData) {
+    const table = document.getElementById("report_table");
 
-window.onload = (event) => {
+    const tbody = table.querySelector("tbody");
+    tbody.innerHTML = '';
 
-document.getElementById('uuid-button').addEventListener('click', function () {
-    const uuidValue = document.getElementById('uuid-input').value;
-    const iframe = document.getElementById('report-page');
+    const footerCell = document.getElementById("total_tickets");
 
-    if (iframe) {
-        iframe.contentWindow.postMessage({ action: "run_report", uuid: uuidValue }, "*");
-    } else {
-        console.log("Iframe with ID 'report-page' not found");
-    }
-});
+    if (tableData) {
+        tableData.body.forEach(rowData => {
+            const row = document.createElement("tr");
 
-};
+            const leftCell = document.createElement("td");
+            leftCell.textContent = rowData.left;
+            row.appendChild(leftCell);
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "sidepanel_send") {
-        const tableData = request.data;
+            const rightCell = document.createElement("td");
+            rightCell.textContent = rowData.right;
+            row.appendChild(rightCell);
 
-        let phonesTotal = 0;
-        let emailsAndSelfServiceTotal = 0;
-        let chatsTotal = 0;
-        let otherTotal = 0;
-
-        const categoryMap = {
-            "Phone": "phonesTotal",
-            "Self-service": "emailsAndSelfServiceTotal",
-            "Email": "emailsAndSelfServiceTotal",
-            "Chat": "chatsTotal",
-            "Walk-in": "otherTotal",
-            "Auto-generated": "otherTotal"
-        };
-
-        let existingTable = document.querySelector('table');
-        let table;
-
-        if (existingTable) {
-            existingTable.innerHTML = '';
-            table = existingTable;
-        } else {
-            table = document.createElement('table');
-            table.style.width = '100%';
-            table.style.borderCollapse = 'collapse';
-        }
-
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
-
-        const thLeft = document.createElement('th');
-        thLeft.textContent = 'Type';
-
-        const thRight = document.createElement('th');
-        thRight.textContent = 'Amount';
-
-        headerRow.appendChild(thLeft);
-        headerRow.appendChild(thRight);
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-
-        const tbody = document.createElement('tbody');
-
-        tableData.forEach(rowData => {
-            const row = document.createElement('tr');
-
-            const tdLeft = document.createElement('td');
-            tdLeft.textContent = rowData.left;
-
-            const tdRight = document.createElement('td');
-            tdRight.textContent = rowData.right;
-
-            const category = categoryMap[rowData.left];
-            if (category) {
-                if (category === "phonesTotal") {
-                    phonesTotal += parseFloat(rowData.right);
-                } else if (category === "emailsAndSelfServiceTotal") {
-                    emailsAndSelfServiceTotal += parseFloat(rowData.right);
-                } else if (category === "chatsTotal") {
-                    chatsTotal += parseFloat(rowData.right);
-                } else if (category === "otherTotal") {
-                    otherTotal += parseFloat(rowData.right);
-                }
-            }
-
-            row.appendChild(tdLeft);
-            row.appendChild(tdRight);
             tbody.appendChild(row);
         });
 
-        table.appendChild(tbody);
-        document.getElementById("report_details").prepend(table);
+        footerCell.textContent = tableData.footer.right;
+    } else {
+        footerCell.textContent = 0;
+    }
 
-        let existingButton = document.getElementById('copy');
-        if (existingButton) {
-            existingButton.remove();
+    const report_data = document.querySelector("#report_data");
+    report_data.style.display = "block";
+}
+
+function displayError() {
+    const error_page = document.querySelector("#error_page");
+    error_page.style.display = "block";
+
+    const report_main = document.querySelector("#report_main");
+    report_main.style.display = "none";
+
+    const report_data = document.querySelector("#report_data");
+    report_data.style.display = "none";
+
+    const loading_page = document.querySelector("#loading_page");
+    loading_page.style.display = "none";
+}
+
+function copyReport() {
+    const table = document.getElementById("report_table");
+    const rows = Array.from(table.querySelectorAll("tbody tr"));
+
+    let totals = {
+        phones: 0, 
+        emails: 0, 
+        chats: 0, 
+        others: 0
+    }
+
+    rows.forEach(row => {
+        const source = row.children[0].textContent.trim();
+        const count = parseInt(row.children[1].textContent.trim(), 10);
+
+        if (source === "Phone") {
+            totals.phones += count;
+        } else if (source === "Self-service" || source === "Email") {
+            totals.emails += count;
+        } else if (source === "Chat") {
+            totals.chats += count;
+        } else {
+            totals.others += count;
         }
+    });
 
-        let copyButton = document.createElement('button');
-        copyButton.id = "copy";
-        copyButton.textContent = "Copy to clipboard";
-        document.getElementById("report_details").appendChild(copyButton);
+    const clipboardText = `${totals.phones}\t${totals.emails}\t${totals.chats}\t${totals.others}`;
+    navigator.clipboard.writeText(clipboardText);
+}
 
-        const totals = `${phonesTotal}\t${emailsAndSelfServiceTotal}\t${chatsTotal}\t${otherTotal}`;
-        navigator.clipboard.writeText(totals);
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "receive_report") {
+        const tableData = request.data;
+        createTableFromData(tableData);
+    } else if (request.action === "receive_url") {
+        const iframe = document.getElementById('report-page');
 
-        copyButton.addEventListener('click', function () {
-            const totals = `${phonesTotal}\t${emailsAndSelfServiceTotal}\t${chatsTotal}\t${otherTotal}`;
-            navigator.clipboard.writeText(totals);
-        });
+        if (request.data != iframe.src) {
+            displayError();
+        }
+    } else if (request.action === "receive_loaded") {
+        const loading_page = document.querySelector("#loading_page");
+        loading_page.style.display = "none";
     }
 });
+
+
+function main() {
+    const iframe = document.getElementById('report-page');
+    iframe.contentWindow.postMessage({action: "check_url"}, "*");
+    iframe.contentWindow.postMessage({action: "check_loaded"}, "*");
+
+    const uuidButton = document.getElementById('uuid-button');
+    uuidButton.addEventListener('click', function () {
+        const uuidValue = document.getElementById('uuid-input').value;
+        iframe.contentWindow.postMessage({ action: "run_report", uuid: uuidValue }, "*");
+    });
+
+    const copyButton = document.getElementById('copy-button');
+    copyButton.addEventListener('click', copyReport);
+
+    const refreshButton = document.getElementById('refresh-button');
+    refreshButton.addEventListener('click', () => {
+        window.location.reload();
+    });
+}
+
+window.onload = main;

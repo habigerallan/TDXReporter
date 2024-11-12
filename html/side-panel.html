@@ -8,21 +8,48 @@
 </head>
 
 <body>
-  <main>
-    <h1 class="heading">TDXReporter</h1>
-    <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the
-      report for the specified user.</p>
-  </main>
   <iframe id="report-page"
-    src="https://tdx.umn.edu/TDNext/Apps/29/Reporting/ReportViewer?ReportID=9sbgP2Ep9uY_"></iframe>
-  <section>
+    src="https://tdx.umn.edu/TDNext/Apps/29/Reporting/ReportViewer?ReportID=9sbgP2Ep9uY_">
+  </iframe>
+  
+  <section id="loading_page">
+    <div class="loading-circle"></div>
+  </section>
+
+  <section id="error_page">
+    <h2>Error Loading Report</h2>
+    <p>There was an issue loading the tool. Please sign into 
+    <a href="https://tdx.umn.edu/TDNext/" target="_blank">TDNext</a> 
+     before proceeding.</p>
+
+    <button id="refresh-button">Refresh Page</button>
+
+  </section>
+
+  <section id="report_main">
+    <h1 class="heading">TDXReporter</h1>
+    <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the report for the specified user.</p>
+
     <h1 class="heading">Report Runner</h1>
     <textarea id="uuid-input" class="text-input"></textarea>
     <button id="uuid-button" class="button">Run Report</button>
   </section>
-  <section>
+
+  <section id="report_data">
     <h1 class="heading">Report Info</h1>
-    <section id="report_details"></section>
+    <table id="report_table">
+      <thead>
+        <th>Source</th>
+        <th>Ticket Count</th>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <th>Total:</th>
+        <th id="total_tickets"></th>
+      </tfoot>
+    </table>
+
+    <button id="copy-button" class="button">Copy</button>
   </section>
 </body>
 

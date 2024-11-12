@@ -10,8 +10,39 @@ p {
   color: #000000;
 }
 
+#error_page {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#report_data {
+  display: none;
+}
+
+#loading_page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading-circle {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid plum;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 iframe {
-  position: absolute;
   width: 0;
   height: 0;
   border: 0;
