@@ -1,56 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TDXReporter</title>
   <link rel="stylesheet" href="../css/side_panel.css">
   <script src="../js/side_panel.js"></script>
 </head>
 
 <body>
-  <iframe id="report-page"
-    src="https://tdx.umn.edu/TDNext/Apps/29/Reporting/ReportViewer?ReportID=9sbgP2Ep9uY_">
-  </iframe>
-  
-  <section id="loading_page">
-    <div class="loading-circle"></div>
-  </section>
-
-  <section id="error_page">
-    <h2>Error Loading Report</h2>
-    <p>There was an issue loading the tool. Please sign into 
-    <a href="https://tdx.umn.edu/TDNext/" target="_blank">TDNext</a> 
-     before proceeding.</p>
-
-    <button id="refresh-button">Refresh Page</button>
-
-  </section>
 
   <section id="report_main">
     <h1 class="heading">TDXReporter</h1>
-    <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the report for the specified user.</p>
-
-    <h1 class="heading">Report Runner</h1>
-    <textarea id="uuid-input" class="text-input"></textarea>
+    <div class="uuid-container">
+      <label class="uuid-label" for="uuid-input">UUID:</label>
+      <textarea id="uuid-input" class="text-input" rows="1" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"></textarea>
+    </div>
     <button id="uuid-button" class="button">Run Report</button>
+    <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the report for the specified user.</p>
+  </section>
+
+  <section id="loading_page">
+    <div class="loading-circle"></div>
   </section>
 
   <section id="report_data">
     <h1 class="heading">Report Info</h1>
     <table id="report_table">
       <thead>
-        <th>Source</th>
-        <th>Ticket Count</th>
+        <tr>
+          <th>Source</th>
+          <th>Ticket Count</th>
+        </tr>
       </thead>
       <tbody></tbody>
       <tfoot>
-        <th>Total:</th>
-        <th id="total_tickets"></th>
+        <tr>
+          <th>Total:</th>
+          <th id="total_tickets"></th>
+        </tr>
       </tfoot>
     </table>
 
     <button id="copy-button" class="button">Copy</button>
   </section>
+
+  <section id="error_page">
+    <h2>Error Loading Report</h2>
+    <p>There was an issue loading the tool. Please sign into 
+      <a href="https://tdx.umn.edu/TDNext/" target="_blank">TDNext</a> 
+      before proceeding.</p>
+    <button id="refresh-button" class="button">Refresh Page</button>
+  </section>
+
+  <iframe id="report-page"
+    src="https://tdx.umn.edu/TDNext/Apps/29/Reporting/ReportViewer?ReportID=9sbgP2Ep9uY_">
+  </iframe>
+
 </body>
 
 </html>

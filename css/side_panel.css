@@ -1,36 +1,139 @@
+/* General Body Styles */
 body {
-  background-color: #ffffff;
-}
-
-h1 {
-  color: #000000;
-}
-
-p {
-  color: #000000;
-}
-
-#error_page {
-  display: none;
+  background-color: #E8EDDF;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
-#report_data {
-  display: none;
+/* Section Styling */
+section {
+  background-color: #CFDBD5;
+  width: 90%;
+  max-width: 800px;
+  border: 2px solid #242423;
+  border-radius: 6px;
+  padding: 2%;
+  margin: 20px 0;
+  box-sizing: border-box;
+  text-align: center;
 }
 
+/* Headings */
+.heading {
+  margin: 0;
+  color: #242423;
+  font-weight: bold;
+  background-color: #F5CB5C;
+  border: 2px solid #242423;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+/* Paragraphs */
+.text {
+  color: #242423;
+  font-weight: 400;
+  margin: 10px 0;
+  max-width: 600px;
+}
+
+/* UUID Container Styling */
+.uuid-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid #242423;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #F5CB5C;
+  max-width: 100%;
+}
+
+/* UUID Label Styling */
+.uuid-label {
+  color: #242423;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-right: 2px solid #242423;
+  white-space: nowrap; /* Prevents text from wrapping in label */
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Textarea Styling */
+.text-input {
+  color: #242423;
+  background-color: #F5CB5C;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  resize: none;               /* Disables resizing */
+  overflow: hidden;           /* Hides scrolling */
+  width: 100%;
+  font-size: 14px;
+  padding: 8px;
+  box-sizing: border-box;
+  height: 100%;               /* Matches height with label for uniform appearance */
+  line-height: 1.5em;
+  min-width: 0;               /* Prevents the textarea from expanding too much */
+}
+
+.text-input::placeholder {
+  color: #333533;
+  line-height: 1.5em;
+}
+
+.text-input:focus {
+  outline: none;
+  border: none;
+  background-color: #F5CB5C;  /* Keeps background consistent on focus */
+}
+
+/* Button Styling */
+.button {
+  color: #242423;
+  background: #F5CB5C;
+  padding: 8px 20px;
+  border: 2px solid #242423;
+  border-radius: 6px;
+  box-shadow: #242423 0px 2px 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px auto;
+  display: block;
+  width: fit-content;
+}
+
+.button:hover, .button:active {
+  background-color: #F5CB5C;
+  color: #333533;
+}
+
+.button:active {
+  opacity: 0.75;
+}
+
+/* Loading Page */
 #loading_page {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 2;
 }
 
+/* Loading Circle Animation */
 .loading-circle {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid plum;
+  border: 8px solid #CFDBD5;
+  border-top: 8px solid #333533;
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -42,8 +145,72 @@ p {
   100% { transform: rotate(360deg); }
 }
 
+/* Error Page */
+#error_page {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+}
+
+/* Error Page Heading */
+#error_page h2 {
+  color: #d9534f;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Error Page Text */
+#error_page p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Report Data Section */
+#report_data {
+  display: none;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Report Table */
+#report_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+#report_table th, #report_table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+#report_table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+#report_table tfoot {
+  font-weight: bold;
+}
+
+#total_tickets {
+  font-weight: bold;
+}
+
+/* iFrame Styling */
 iframe {
-  width: 0;
-  height: 0;
-  border: 0;
+  display: none;
+  width: 100%;
+  height: 600px;
+  border: none;
+  margin-top: 20px;
 }

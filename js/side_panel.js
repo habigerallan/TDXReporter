@@ -78,6 +78,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "receive_report") {
         const tableData = request.data;
         createTableFromData(tableData);
+        const loading_page = document.querySelector("#loading_page");
+        loading_page.style.display = "none";
     } else if (request.action === "receive_url") {
         const iframe = document.getElementById('report-page');
 
@@ -87,11 +89,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.action === "receive_loaded") {
         const loading_page = document.querySelector("#loading_page");
         loading_page.style.display = "none";
+
+        const report_main = document.querySelector("#report_main");
+        report_main.style.display = "block";
     }
 });
 
 
 function main() {
+    const error_page = document.querySelector("#error_page");
+    error_page.style.display = "none";
+
+    const report_main = document.querySelector("#report_main");
+    report_main.style.display = "none";
+
+    const report_data = document.querySelector("#report_data");
+    report_data.style.display = "none";
+
     const iframe = document.getElementById('report-page');
     iframe.contentWindow.postMessage({action: "check_url"}, "*");
     iframe.contentWindow.postMessage({action: "check_loaded"}, "*");
@@ -100,6 +114,8 @@ function main() {
     uuidButton.addEventListener('click', function () {
         const uuidValue = document.getElementById('uuid-input').value;
         iframe.contentWindow.postMessage({ action: "run_report", uuid: uuidValue }, "*");
+        const loading_page = document.querySelector("#loading_page");
+        loading_page.style.display = "block";
     });
 
     const copyButton = document.getElementById('copy-button');
