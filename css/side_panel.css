@@ -13,13 +13,20 @@ body {
 /* Section Styling */
 section {
   background-color: #CFDBD5;
-  width: 90%;
-  max-width: 800px;
   border: 2px solid #242423;
   border-radius: 6px;
   padding: 2%;
   margin: 20px 0;
   box-sizing: border-box;
+  text-align: center;
+  display: none;
+}
+
+#report_main {
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -120,11 +127,9 @@ section {
 
 /* Loading Page */
 #loading_page {
-  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  position: absolute;
+  height: 100%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 2;
@@ -147,12 +152,13 @@ section {
 
 /* Error Page */
 #error_page {
-  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 100vh;
   width: 100%;
+  padding: 0;
+  margin: 0;
   text-align: center;
 }
 
@@ -171,10 +177,8 @@ section {
 
 /* Report Data Section */
 #report_data {
-  display: none;
   padding: 20px;
   width: 90%;
-  max-width: 800px;
   margin: 0 auto;
   text-align: center;
 }

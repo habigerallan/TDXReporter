@@ -97,15 +97,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 
 function main() {
-    const error_page = document.querySelector("#error_page");
-    error_page.style.display = "none";
-
-    const report_main = document.querySelector("#report_main");
-    report_main.style.display = "none";
-
-    const report_data = document.querySelector("#report_data");
-    report_data.style.display = "none";
-
     const iframe = document.getElementById('report-page');
     iframe.contentWindow.postMessage({action: "check_url"}, "*");
     iframe.contentWindow.postMessage({action: "check_loaded"}, "*");
@@ -115,7 +106,7 @@ function main() {
         const uuidValue = document.getElementById('uuid-input').value;
         iframe.contentWindow.postMessage({ action: "run_report", uuid: uuidValue }, "*");
         const loading_page = document.querySelector("#loading_page");
-        loading_page.style.display = "block";
+        loading_page.style.display = "flex";
     });
 
     const copyButton = document.getElementById('copy-button');
