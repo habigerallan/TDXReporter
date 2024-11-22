@@ -11,22 +11,22 @@
 
 <body>
 
-  <section id="report_main">
-    <h1 class="heading">TDXReporter</h1>
+  <section id="main_section">
+    <h1 id="main_heading">TDXReporter</h1>
     <div class="uuid-container">
       <label class="uuid-label" for="uuid-input">UUID:</label>
       <textarea id="uuid-input" class="text-input" rows="1" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"></textarea>
     </div>
     <button id="uuid-button" class="button">Run Report</button>
-    <p class="text">To use, please copy and paste the user's UUID into the box below. When you hit run, it will run the report for the specified user.</p>
+    <p class="text">To use, please copy and paste the user's UUID into the box above. When you hit run, it will run the report for the specified user.</p>
   </section>
 
-  <section id="loading_page">
+  <section id="loading_section">
     <div class="loading-circle"></div>
   </section>
 
-  <section id="report_data">
-    <h1 class="heading">Report Info</h1>
+  <section id="data_section">
+    <h1 id="data_heading">Report Info</h1>
     <table id="report_table">
       <thead>
         <tr>
@@ -46,7 +46,7 @@
     <button id="copy-button" class="button">Copy</button>
   </section>
 
-  <section id="error_page">
+  <section id="error_section">
     <h2>Error Loading Report</h2>
     <p>There was an issue loading the tool. Please sign into 
       <a href="https://tdx.umn.edu/TDNext/" target="_blank">TDNext</a> 

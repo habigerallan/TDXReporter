@@ -26,22 +26,19 @@ function createTableFromData(tableData) {
         footerCell.textContent = 0;
     }
 
-    const report_data = document.querySelector("#report_data");
+    const report_data = document.querySelector("#data_section");
     report_data.style.display = "block";
 }
 
 function displayError() {
-    const error_page = document.querySelector("#error_page");
-    error_page.style.display = "block";
-
-    const report_main = document.querySelector("#report_main");
-    report_main.style.display = "none";
-
-    const report_data = document.querySelector("#report_data");
-    report_data.style.display = "none";
-
-    const loading_page = document.querySelector("#loading_page");
-    loading_page.style.display = "none";
+    const sections = document.querySelectorAll("section");
+    sections.forEach(section => {
+        if (section.id != "error_section") {
+            section.style.display = "none";
+        } else {
+            section.style.display = "block";
+        }
+    });
 }
 
 function copyReport() {
@@ -78,7 +75,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "receive_report") {
         const tableData = request.data;
         createTableFromData(tableData);
-        const loading_page = document.querySelector("#loading_page");
+        const loading_page = document.querySelector("#loading_section");
         loading_page.style.display = "none";
     } else if (request.action === "receive_url") {
         const iframe = document.getElementById('report-page');
@@ -87,10 +84,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             displayError();
         }
     } else if (request.action === "receive_loaded") {
-        const loading_page = document.querySelector("#loading_page");
+        const loading_page = document.querySelector("#loading_section");
         loading_page.style.display = "none";
 
-        const report_main = document.querySelector("#report_main");
+        const report_main = document.querySelector("#main_section");
         report_main.style.display = "block";
     }
 });
@@ -105,7 +102,7 @@ function main() {
     uuidButton.addEventListener('click', function () {
         const uuidValue = document.getElementById('uuid-input').value;
         iframe.contentWindow.postMessage({ action: "run_report", uuid: uuidValue }, "*");
-        const loading_page = document.querySelector("#loading_page");
+        const loading_page = document.querySelector("#loading_section");
         loading_page.style.display = "flex";
     });
 

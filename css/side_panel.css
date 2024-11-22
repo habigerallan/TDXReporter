@@ -1,7 +1,5 @@
-/* General Body Styles */
 body {
   background-color: #E8EDDF;
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,28 +8,136 @@ body {
   justify-content: center;
 }
 
-/* Section Styling */
 section {
   background-color: #CFDBD5;
   border: 2px solid #242423;
   border-radius: 6px;
   padding: 2%;
-  margin: 20px 0;
+  margin: auto;
+  margin-top: 5%;
   box-sizing: border-box;
   text-align: center;
   display: none;
 }
 
-#report_main {
+#main_section {
+  width: 90%;
+}
+
+#loading_section {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  opacity: 50%;
+  top: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.loading-circle {
+  border: 8px solid #CFDBD5;
+  border-top: 8px solid #333533;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#data_section {
   padding: 20px;
   width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
   text-align: center;
 }
 
-/* Headings */
-.heading {
+#error_section {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 90%;
+  padding: 1%;
+  text-align: center;
+}
+
+#error_section h2 {
+  color: #d9534f;
+  font-size: 24px;
+  width: 80%;
+  margin: auto;
+  padding: 2%;
+  border-bottom: 1px solid #242423;
+}
+
+#error_section p {
+  color: #242423;
+  font-size: 16px;
+}
+
+#report_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+#report_table th, #report_table td {
+  padding: 12px;
+  border: 2px solid #242423;
+  text-align: center;
+}
+
+#report_table thead, #report_table tfoot {
+  background-color: #ecf1ef;
+}
+
+#report_table tbody tr {
+  background-color: #fbfcfb;
+}
+
+#report_table tbody tr:nth-child(even) {
+  background-color: #ecf1ef;
+}
+
+#report_table tbody tr:last-child {
+  background-color: #fbfcfb;
+}
+
+#total_tickets {
+  font-weight: bold;
+}
+
+iframe {
+  display: none;
+  width: 100%;
+  height: 600px;
+  border: none;
+  margin-top: 20px;
+}
+
+#main_heading {
+  margin: 0;
+  color: #242423;
+  font-weight: bold;
+  background-color: #F5CB5C;
+  border: 2px solid #242423;
+  border-bottom: 0;
+  border-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 10px;
+}
+
+#data_heading {
   margin: 0;
   color: #242423;
   font-weight: bold;
@@ -45,8 +151,8 @@ section {
 .text {
   color: #242423;
   font-weight: 400;
-  margin: 10px 0;
-  max-width: 600px;
+  margin: auto;
+  width: 80%;
 }
 
 /* UUID Container Styling */
@@ -55,6 +161,8 @@ section {
   align-items: center;
   border: 2px solid #242423;
   border-radius: 6px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   overflow: hidden;
   background-color: #F5CB5C;
   max-width: 100%;
@@ -111,7 +219,7 @@ section {
   box-shadow: #242423 0px 2px 4px;
   cursor: pointer;
   font-weight: bold;
-  margin: 10px auto;
+  margin: 2% auto;
   display: block;
   width: fit-content;
 }
@@ -123,98 +231,4 @@ section {
 
 .button:active {
   opacity: 0.75;
-}
-
-/* Loading Page */
-#loading_page {
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
-  z-index: 2;
-}
-
-/* Loading Circle Animation */
-.loading-circle {
-  border: 8px solid #CFDBD5;
-  border-top: 8px solid #333533;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Error Page */
-#error_page {
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-/* Error Page Heading */
-#error_page h2 {
-  color: #d9534f;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-/* Error Page Text */
-#error_page p {
-  color: #666;
-  font-size: 16px;
-}
-
-/* Report Data Section */
-#report_data {
-  padding: 20px;
-  width: 90%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Report Table */
-#report_table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-size: 16px;
-}
-
-#report_table th, #report_table td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-#report_table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-#report_table tfoot {
-  font-weight: bold;
-}
-
-#total_tickets {
-  font-weight: bold;
-}
-
-/* iFrame Styling */
-iframe {
-  display: none;
-  width: 100%;
-  height: 600px;
-  border: none;
-  margin-top: 20px;
 }
