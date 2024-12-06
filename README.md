@@ -16,7 +16,14 @@ In TeamDynamix, running a report requires manual input for each filter which slo
 
 ## Installation
 
+1. Download the most recent .crx file found in Releases.
+2. Navigate to chrome://extensions/ and enable Developer Mode.
+3. Drag and Drog .crx file in and install when prompted.
 
+## To Use
+
+1. Pin Extension to Navigation Bar (optionally but recommended)
+2. Click on Extension Icon when its use is neccessary.
 
 ## Technologies
 
