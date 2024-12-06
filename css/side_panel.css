@@ -147,7 +147,6 @@ iframe {
   padding: 10px;
 }
 
-/* Paragraphs */
 .text {
   color: #242423;
   font-weight: 400;
@@ -155,7 +154,6 @@ iframe {
   width: 80%;
 }
 
-/* UUID Container Styling */
 .uuid-container {
   display: flex;
   align-items: center;
@@ -168,34 +166,32 @@ iframe {
   max-width: 100%;
 }
 
-/* UUID Label Styling */
 .uuid-label {
   color: #242423;
   font-weight: bold;
   padding: 8px 12px;
   border-right: 2px solid #242423;
-  white-space: nowrap; /* Prevents text from wrapping in label */
+  white-space: nowrap;
   display: flex;
   align-items: center;
   height: 100%;
 }
 
-/* Textarea Styling */
 .text-input {
   color: #242423;
   background-color: #F5CB5C;
   border: none;
   border-radius: 0;
   box-shadow: none;
-  resize: none;               /* Disables resizing */
-  overflow: hidden;           /* Hides scrolling */
+  resize: none;
+  overflow: hidden;
   width: 100%;
   font-size: 14px;
   padding: 8px;
   box-sizing: border-box;
-  height: 100%;               /* Matches height with label for uniform appearance */
+  height: 100%;
   line-height: 1.5em;
-  min-width: 0;               /* Prevents the textarea from expanding too much */
+  min-width: 0;
 }
 
 .text-input::placeholder {
@@ -206,10 +202,9 @@ iframe {
 .text-input:focus {
   outline: none;
   border: none;
-  background-color: #F5CB5C;  /* Keeps background consistent on focus */
+  background-color: #F5CB5C;
 }
 
-/* Button Styling */
 .button {
   color: #242423;
   background: #F5CB5C;
