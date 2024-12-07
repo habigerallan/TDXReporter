@@ -28,7 +28,5 @@ In TeamDynamix, running a report requires manual input for each filter which slo
 
 ## Technologies
 
-List the core technologies, frameworks, or tools used in the project:
-
 - **Programming Languages**: JS, HTML, CSS
 - **Packages**: Chrome Extension API, Chrome Side-Panel API
