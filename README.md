@@ -17,9 +17,15 @@ In TeamDynamix, running a report requires manual input for each filter which slo
 
 ## Installation
 
-1. Download the most recent .crx file found in Releases.
-2. Navigate to chrome://extensions/ and enable Developer Mode.
-3. Drag and Drog .crx file in and install when prompted.
+Recommended:
+1. Download the most recent .crx file found in Releases (Note: Needs to be downloaded on a non-chromium browser).
+3. Navigate to chrome://extensions/ and enable Developer Mode.
+4. Drag and Drog .crx file in and install when prompted.
+
+Alternate:
+1. Download the source files of the extension.
+3. Navigate to chrome://extensions/ and enable Developer Mode.
+4. Load the extension using the "Load unpacked" option and select the downloaded folder.
 
 ## Usage
 
@@ -29,4 +35,4 @@ In TeamDynamix, running a report requires manual input for each filter which slo
 ## Technologies
 
 - **Programming Languages**: JS, HTML, CSS
-- **Packages**: Chrome Extension API, Chrome Side-Panel API
+- **API Used**: Chrome Extension API, Chrome Side-Panel API
